@@ -287,12 +287,30 @@ To update CamillaDSP or GUI:
 2. Reload launch agents if plist files changed
 3. Restart services or reboot
 
+## Monitoring Your System
+
+For real-time monitoring of CPU temperature, fan speed, network I/O, and system resources while running CamillaDSP, check out the **[Terminal Monitor](https://github.com/nikhilblal/terminal-monitor)** tool. It provides a beautiful htop-style interface perfect for keeping an eye on your audio processing system.
+
+```bash
+git clone https://github.com/nikhilblal/terminal-monitor.git
+cd terminal-monitor
+pip3 install -r requirements.txt
+python3 system_monitor.py
+```
+
 ## Additional Resources
 
-- [CamillaDSP Documentation](https://github.com/HEnquist/camilladsp)
-- [CamillaGUI Documentation](https://github.com/HEnquist/camillagui)
-- [Shairport Sync Documentation](https://github.com/mikebrady/shairport-sync)
-- [BlackHole Audio Driver](https://existential.audio/blackhole/)
+### Installation & Core Documentation
+- [CamillaDSP Official README](https://github.com/HEnquist/camilladsp/blob/master/README.md) - **Start here for installing CamillaDSP**
+- [CamillaDSP Documentation](https://github.com/HEnquist/camilladsp) - Full documentation
+- [CamillaGUI Documentation](https://github.com/HEnquist/camillagui) - GUI setup and usage
+
+### Audio Tools
+- [Shairport Sync Documentation](https://github.com/mikebrady/shairport-sync) - AirPlay receiver
+- [BlackHole Audio Driver](https://existential.audio/blackhole/) - Virtual audio routing
+
+### Monitoring
+- [Terminal Monitor](https://github.com/nikhilblal/terminal-monitor) - Real-time system monitoring tool
 
 ## Credits
 
