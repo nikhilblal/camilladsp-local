@@ -1,0 +1,178 @@
+description: null
+devices:
+  adjust_period: 5
+  capture:
+    channels: 2
+    device: BlackHole 2ch
+    format: S32LE
+    labels: null
+    type: CoreAudio
+  capture_samplerate: 44100
+  chunksize: 2048
+  enable_rate_adjust: true
+  multithreaded: null
+  playback:
+    channels: 4
+    device: M4
+    exclusive: false
+    format: S24LE
+    type: CoreAudio
+  queuelimit: null
+  rate_measure_interval: null
+  resampler:
+    profile: Balanced
+    type: AsyncSinc
+  samplerate: 44100
+  silence_threshold: null
+  silence_timeout: null
+  stop_on_rate_change: null
+  target_level: 0
+  volume_limit: null
+  volume_ramp_time: null
+  worker_threads: null
+filters:
+  convFilter2:
+    description: null
+    parameters:
+      channel: 0
+      filename: ../coeffs/subwoofer-44k.wav
+      type: Wav
+    type: Conv
+  convFilter3:
+    description: null
+    parameters:
+      channel: 1
+      filename: ../coeffs/subwoofer-44k.wav
+      type: Wav
+    type: Conv
+  convSpeaker0:
+    description: null
+    parameters:
+      channel: 0
+      filename: ../coeffs/speakers-44k.wav
+      type: Wav
+    type: Conv
+  convSpeaker1:
+    description: null
+    parameters:
+      channel: 1
+      filename: ../coeffs/speakers-44k.wav
+      type: Wav
+    type: Conv
+  gain:
+    description: null
+    parameters:
+      gain: -2
+      inverted: false
+      mute: false
+      scale: null
+    type: Gain
+  highPassFilter:
+    description: null
+    parameters:
+      freq: 60
+      order: 2
+      type: ButterworthHighpass
+    type: BiquadCombo
+  highpassfilter:
+    description: null
+    parameters:
+      freq: 60
+      order: 2
+      type: ButterworthHighpass
+    type: BiquadCombo
+  lowPassFilter:
+    description: null
+    parameters:
+      freq: 74
+      order: 4
+      type: LinkwitzRileyLowpass
+    type: BiquadCombo
+  lowpassfilter:
+    description: null
+    parameters:
+      freq: 74
+      order: 4
+      type: LinkwitzRileyLowpass
+    type: BiquadCombo
+mixers:
+  2x4:
+    channels:
+      in: 2
+      out: 4
+    description: null
+    labels: null
+    mapping:
+    - dest: 0
+      mute: false
+      sources:
+      - channel: 0
+        gain: 0
+        inverted: false
+        mute: false
+        scale: null
+    - dest: 1
+      mute: false
+      sources:
+      - channel: 1
+        gain: 0
+        inverted: false
+        mute: false
+        scale: null
+    - dest: 2
+      mute: false
+      sources:
+      - channel: 0
+        gain: 0
+        inverted: true
+        mute: false
+        scale: null
+    - dest: 3
+      mute: false
+      sources:
+      - channel: 1
+        gain: 0
+        inverted: false
+        mute: false
+        scale: null
+pipeline:
+- bypassed: null
+  description: null
+  name: 2x4
+  type: Mixer
+- bypassed: null
+  channels:
+  - 0
+  description: null
+  names:
+  - convSpeaker0
+  - highpassfilter
+  type: Filter
+- bypassed: null
+  channels:
+  - 1
+  description: null
+  names:
+  - convSpeaker1
+  - highpassfilter
+  type: Filter
+- bypassed: null
+  channels:
+  - 2
+  description: null
+  names:
+  - gain
+  - convFilter2
+  - lowpassfilter
+  type: Filter
+- bypassed: null
+  channels:
+  - 3
+  description: null
+  names:
+  - gain
+  - convFilter3
+  - lowpassfilter
+  type: Filter
+processors: {}
+title: null

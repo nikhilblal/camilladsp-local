@@ -1,0 +1,19 @@
+# Python virtual environments
+gui-venv/
+*venv/
+__pycache__/
+*.pyc
+
+# Log files
+*.log
+logs/
+
+# Temp files
+temp/
+*.tmp
+
+# macOS
+.DS_Store
+
+# State files
+statefile.yml
