@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.camillagui</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/Users/dsp/camilladsp/camillagui_backend/camillagui_backend</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/dsp/camilladsp</string>
+    <key>StandardOutPath</key>
+    <string>/Users/dsp/camilladsp/gui.log</string>
+    <key>RunAtLoad</key>
+    <true/>
+  </dict>
+</plist>
