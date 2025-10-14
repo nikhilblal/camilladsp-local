@@ -72,8 +72,8 @@ brew install blackhole-2ch
 
 ```
 camilladsp/
-├── bin/                    # CamillaDSP binary
-├── camillagui_backend/     # Standalone GUI backend application
+├── bin/                    # CamillaDSP binary (download separately)
+├── camillagui_backend/     # GUI backend (download separately)
 ├── gui/                    # GUI source and configuration
 ├── coeffs/                 # Convolution filter coefficients
 ├── configs/                # CamillaDSP configuration files
@@ -88,13 +88,20 @@ camilladsp/
 └── full_install_venv.sh   # Virtual environment installer
 ```
 
+**Note**: Binaries are not included in this repository to keep it lightweight. Download them from the official releases during installation.
+
 ## Installation
 
 ### 1. Prerequisites
 
-Install Homebrew dependencies:
+Install BlackHole 2ch (virtual audio routing driver):
 ```bash
-brew install shairport-sync blackhole-2ch
+brew install blackhole-2ch
+```
+
+**Note about Shairport Sync**: On modern Macs with **AirPlay 2 built-in**, you do not need Shairport Sync. You can use the native AirPlay receiver and route it through BlackHole directly. If you're on an older Mac or prefer Shairport Sync for advanced features:
+```bash
+brew install shairport-sync
 ```
 
 ### 2. Clone Repository
@@ -104,19 +111,78 @@ git clone git@github.com:nikhilblal/camilladsp-local.git
 cd camilladsp-local
 ```
 
-### 3. Install GUI (Optional)
+### 3. Install CamillaDSP Binary
 
-If you want to use the Python-based GUI instead of the standalone backend:
+**Download the appropriate binary for your Mac:**
+
+1. Visit the [CamillaDSP Releases page](https://github.com/HEnquist/camilladsp/releases)
+2. Download the correct binary:
+   - **Apple Silicon (M1/M2/M3/M4)**: `camilladsp-macos-aarch64.tar.gz`
+   - **Intel Mac**: `camilladsp-macos-amd64.tar.gz`
+
+3. Extract and install:
+   ```bash
+   # For Apple Silicon:
+   curl -L https://github.com/HEnquist/camilladsp/releases/latest/download/camilladsp-macos-aarch64.tar.gz -o camilladsp.tar.gz
+
+   # For Intel:
+   # curl -L https://github.com/HEnquist/camilladsp/releases/latest/download/camilladsp-macos-amd64.tar.gz -o camilladsp.tar.gz
+
+   tar -xzf camilladsp.tar.gz
+   mv camilladsp bin/camilladsp
+   chmod +x bin/camilladsp
+   rm camilladsp.tar.gz
+   ```
+
+4. Remove macOS quarantine attribute:
+   ```bash
+   xattr -d com.apple.quarantine bin/camilladsp
+   ```
+
+5. Verify installation:
+   ```bash
+   ./bin/camilladsp --version
+   ```
+
+### 4. Install CamillaGUI Backend (Optional)
+
+Two GUI options are available:
+
+**Option A: Standalone GUI Backend (Recommended)**
+
+Download the pre-built standalone backend:
+
+1. Visit the [CamillaGUI Releases page](https://github.com/HEnquist/camillagui/releases)
+2. Download the backend for your platform:
+   - **macOS**: `camillagui_backend-macos.zip`
+3. Extract and install:
+   ```bash
+   # Download (replace VERSION with latest version, e.g., v2.0.1)
+   curl -L https://github.com/HEnquist/camillagui/releases/latest/download/camillagui_backend-macos.zip -o camillagui_backend.zip
+
+   unzip camillagui_backend.zip -d camillagui_backend/
+   chmod +x camillagui_backend/camillagui_backend
+   rm camillagui_backend.zip
+
+   # Remove quarantine
+   xattr -dr com.apple.quarantine camillagui_backend/
+   ```
+
+4. Test it:
+   ```bash
+   ./camillagui_backend/camillagui_backend
+   ```
+
+**Option B: Python-based GUI**
+
+Install the Python GUI in a virtual environment:
 ```bash
 ./full_install_venv.sh
 ```
 
-Or use the standalone GUI backend:
-```bash
-./camillagui_backend/camillagui_backend
-```
+This option is useful if you want to modify the GUI or if the standalone backend doesn't work on your system.
 
-### 4. Setup Launch Agents
+### 5. Setup Launch Agents
 
 Install the launch agents to auto-start CamillaDSP and CamillaGUI on boot:
 
@@ -130,18 +196,20 @@ launchctl load ~/Library/LaunchAgents/com.camilladsp.launch.plist
 launchctl load ~/Library/LaunchAgents/com.camillagui.plist
 ```
 
-**Note**: You may need to edit the paths in the plist files to match your installation directory.
+**Important**: Edit the paths in the plist files to match your installation directory before loading them.
 
-### 5. Configure Shairport Sync
+### 6. Configure Shairport Sync (Optional - Only if using Shairport Sync)
 
-Copy the Shairport configuration:
+**Skip this step if you're using native AirPlay 2 on a modern Mac.**
+
+If you installed Shairport Sync in step 1, copy the Shairport configuration:
 ```bash
 sudo cp shairport-sync.conf /usr/local/etc/shairport-sync.conf
 ```
 
 This configuration pipes AirPlay audio through CamillaDSP for processing.
 
-### 6. Setup Automator (Optional)
+### 7. Setup Automator (Optional - Only if using Shairport Sync)
 
 The `automator/LaunchShairport.app` provides an easy way to start Shairport Sync:
 - Copy it to `/Applications/` if you want it in your main apps folder

@@ -8,7 +8,7 @@
   <array>
     <string>/bin/zsh</string>
     <string>-lc</string>
-    <string>/Users/dsp/camilladsp/runbkgd.sh</string>
+    <string>/Users/nikhil/camilladsp-local/runbkgd.sh</string>
   </array>
 
   <key>RunAtLoad</key><true/>
@@ -16,7 +16,7 @@
   <key>ProcessType</key><string>Interactive</string>
   <key>Nice</key><integer>-10</integer>
 
-  <key>StandardOutPath</key><string>/Users/dsp/camilladsp/logs/stdout.launchd.log</string>
-  <key>StandardErrorPath</key><string>/Users/dsp/camilladsp/logs/stderr.launchd.log</string>
-  <key>WorkingDirectory</key><string>/Users/dsp/camilladsp</string>
+  <key>StandardOutPath</key><string>/Users/nikhil/camilladsp-local/logs/stdout.launchd.log</string>
+  <key>StandardErrorPath</key><string>/Users/nikhil/camilladsp-local/logs/stderr.launchd.log</string>
+  <key>WorkingDirectory</key><string>/Users/nikhil/camilladsp-local</string>
 </dict></plist>

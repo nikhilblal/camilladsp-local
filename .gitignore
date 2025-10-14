@@ -17,3 +17,8 @@ temp/
 
 # State files
 statefile.yml
+
+# Binaries (download on-demand)
+bin/camilladsp
+camillagui_backend/camillagui_backend
+camillagui_backend/_internal/
